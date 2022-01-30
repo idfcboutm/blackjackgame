@@ -5,10 +5,5 @@ heart_cards = cards
 heart_cards = cards
 diamond_cards = cards
 
-print(spade_cards)
-print(heart_cards)
-print(heart_cards)
-print(diamond_cards)
-
 
 played_cards = []
