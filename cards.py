@@ -1,0 +1,2 @@
+cards = []
+played_cards = []
