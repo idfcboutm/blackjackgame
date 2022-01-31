@@ -50,7 +50,7 @@ def check_card(random_symbol, random_card, picked_card, random_card_value):
     if random_symbol == "Spade":
         if random_card in spade_card:
             spade_card = [x for x in spade_card if x != random_card]
-            print("This is the picked Card" + str(picked_card))
+            print_picked_card(picked_card)
             card_count(random_card_value)
         else:
             print_already_dealed()
@@ -59,7 +59,7 @@ def check_card(random_symbol, random_card, picked_card, random_card_value):
     elif random_symbol == "Diamond":
         if random_card in diamond_card:
             diamond_card = [x for x in diamond_card if x != random_card]
-            print("This is the picked Card" + str(picked_card))
+            print_picked_card(picked_card)
             card_count(random_card_value)
         else:
             print_already_dealed()
@@ -68,7 +68,7 @@ def check_card(random_symbol, random_card, picked_card, random_card_value):
     elif random_symbol == "Club":
         if random_card in club_card:
             club_card = [x for x in club_card if x != random_card]
-            print("This is the picked Card" + str(picked_card))
+            print_picked_card(picked_card)
             card_count(random_card_value)
         else:
             print_already_dealed()
@@ -77,14 +77,19 @@ def check_card(random_symbol, random_card, picked_card, random_card_value):
     elif random_symbol == "Heart":
         if random_card in heart_card:
             heart_card = [x for x in heart_card if x != random_card]
-            print("This is the picked Card" + str(picked_card))
+            print_picked_card(picked_card)
             card_count(random_card_value)
         else:
             print_already_dealed()
             pick_card()
 
 
+# printing picked card
+def print_picked_card(picked_card):
+    print("This is the picked Card" + str(picked_card))
 # printing a statement
+
+
 def print_already_dealed():
     print("Card was already dealed. Picking another one")
 
