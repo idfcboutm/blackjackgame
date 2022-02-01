@@ -21,17 +21,23 @@ class Card:
 def start_game():
     player_count = int(input("Bitte Spieleranzahl angeben"))
     i = 0
+    k = 0
     dealer_number = player_count + 1
     dealer_second_card = dealer_number*2
     print("this is dealer_second_card" + str(dealer_second_card))
     print("this is the dealer number" + str(dealer_number))
     while i <= player_count*2+1:
         i += 1
+        k += 1
         print(i)
         if i == dealer_number or i == dealer_second_card:
             pick_card_dealer()
+            k = 0
         else:
+            print("Player: " + str(k))
             pick_card()
+        
+        
 
 
 # picking a random card as well as a random symbol
@@ -71,19 +77,19 @@ def pick_card_dealer():
     if random_card == "J" or random_card == "Q" or random_card == "K":
         picked_card = Card(random_symbol, random_card).get_list()
         random_card_value = 10
-        check_card(random_symbol, random_card,
+        check_card_dealer(random_symbol, random_card,
                    picked_card, random_card_value)
 
     elif random_card == "A":
         picked_card = Card(random_symbol, random_card).get_list()
         random_card_value = 11
-        check_card(random_symbol, random_card,
+        check_card_dealer(random_symbol, random_card,
                    picked_card, random_card_value)
 
     else:
         picked_card = Card(random_symbol, random_card).get_list()
         random_card_value = int(random_card)
-        check_card(random_symbol, random_card,
+        check_card_dealer(random_symbol, random_card,
                    picked_card, random_card_value)
 
 # check if card was already played
@@ -151,6 +157,68 @@ def heart_deal(random_card, heart_card, picked_card, random_card_value):
         pick_card()
 
 
+def check_card_dealer(random_symbol, random_card, picked_card, random_card_value):
+    global diamond_card
+    global club_card
+    global heart_card
+    global spade_card
+
+    if random_symbol == "Spade":
+        spade_deal_dealer(random_card, spade_card, picked_card, random_card_value)
+
+    elif random_symbol == "Diamond":
+        diamond_deal_dealer(random_card, diamond_card, picked_card, random_card_value)
+    elif random_symbol == "Club":
+        club_deal_dealer(random_card, club_card, picked_card, random_card_value)
+
+    elif random_symbol == "Heart":
+        heart_deal_dealer(random_card, heart_card, picked_card, random_card_value)
+
+
+# def spade_deal_dealer
+def spade_deal_dealer(random_card, spade_card, picked_card, random_card_value):
+    if random_card in spade_card:
+        spade_card = [x for x in spade_card if x != random_card]
+        print_picked_card(picked_card)
+        card_count_dealer(random_card_value)
+    else:
+        print_already_dealed()
+        pick_card()
+
+
+# def diamond_deal_dealer
+def diamond_deal_dealer(random_card, diamond_card, picked_card, random_card_value):
+    if random_card in diamond_card:
+        diamond_card = [x for x in diamond_card if x != random_card]
+        print_picked_card(picked_card)
+        card_count_dealer(random_card_value)
+    else:
+        print_already_dealed()
+        pick_card()
+
+
+# def club_deal_dealer
+def club_deal_dealer(random_card, club_card, picked_card, random_card_value):
+    if random_card in club_card:
+        club_card = [x for x in club_card if x != random_card]
+        print_picked_card(picked_card)
+        card_count_dealer(random_card_value)
+    else:
+        print_already_dealed()
+        pick_card()
+
+
+# def heart_deal_dealer
+def heart_deal_dealer(random_card, heart_card, picked_card, random_card_value):
+    if random_card in heart_card:
+        heart_card = [x for x in heart_card if x != random_card]
+        print_picked_card(picked_card)
+        card_count_dealer(random_card_value)
+    else:
+        print_already_dealed()
+        pick_card()
+
+
 # printing picked card
 def print_picked_card(picked_card):
     print("This is the picked Card" + str(picked_card))
@@ -187,6 +255,18 @@ def card_count(value):
         card_counted = 0
     print("")
 
+#counting dealer_card
+
+card_counted_dealer= 0
+def card_count_dealer(value):
+    global card_counted_dealer
+    value = int(value)
+    card_counted_dealer += value
+    print("This is the card_count_dealer: " + str(card_counted_dealer))
+    if card_counted_dealer > 21:
+        print("You lost!")
+        card_counted_dealer = 0
+    print("")
 
 deal_card_btn = tk.Button(app, text="deal card", command=pick_card)
 deal_card_btn.grid(row=0, column=1)
