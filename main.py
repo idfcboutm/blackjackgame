@@ -45,11 +45,11 @@ def pick_card():
     print("This is the random card dealead  to the player: " + str(random_card))
     if random_card == "J" or random_card == "Q" or random_card == "K":
         picked_card = Card(random_symbol, random_card).get_list()
-        random_card_value = 10
+        random_card_value = int(10)
         check_card(random_symbol, random_card, picked_card, random_card_value)
     elif random_card == "A":
         picked_card = Card(random_symbol, random_card).get_list()
-        random_card_value = 11
+        random_card_value = int(11)
         check_card(random_symbol, random_card, picked_card, random_card_value)
     else:
         picked_card = Card(random_symbol, random_card).get_list()
@@ -67,20 +67,17 @@ def pick_card_dealer():
     if random_card == "J" or random_card == "Q" or random_card == "K":
         picked_card = Card(random_symbol, random_card).get_list()
         random_card_value = 10
-        check_card_dealer(random_symbol, random_card,
-                          picked_card, random_card_value)
+        check_card_dealer(random_symbol, random_card, picked_card, random_card_value)
 
     elif random_card == "A":
         picked_card = Card(random_symbol, random_card).get_list()
         random_card_value = 11
-        check_card_dealer(random_symbol, random_card,
-                          picked_card, random_card_value)
+        check_card_dealer(random_symbol, random_card, picked_card, random_card_value)
 
     else:
         picked_card = Card(random_symbol, random_card).get_list()
         random_card_value = int(random_card)
-        check_card_dealer(random_symbol, random_card,
-                          picked_card, random_card_value)
+        check_card_dealer(random_symbol, random_card, picked_card, random_card_value)
 
 # check if card was already played
 
@@ -92,33 +89,44 @@ def check_card(random_symbol, random_card, picked_card, random_card_value):
     global spade_card
 
     if random_symbol == "Spade":
-        spade_card = card_deal(random_card, spade_card,
-                               picked_card, random_card_value)
-
+        if random_card in spade_card:
+            spade_card = [x for x in spade_card if x != random_card]
+            print(picked_card)
+            print(spade_card)
+        else:
+            print_already_dealed()
+            pick_card()
+        
     elif random_symbol == "Diamond":
-        diamond_card = card_deal(
-            random_card, diamond_card, picked_card, random_card_value)
-
+        
+        if random_card in diamond_card:
+            diamond_card = [x for x in diamond_card if x != random_card]
+            print(picked_card)
+            print(diamond_card)
+        else:
+            print_already_dealed()
+            pick_card()
+        
     elif random_symbol == "Club":
-        club_card = card_deal(random_card, club_card,
-                              picked_card, random_card_value)
+        if random_card in club_card:
+            club_card = [x for x in club_card if x != random_card]
+            print(picked_card)
+            print(club_card)
+        else:
+            print_already_dealed()
+            pick_card()
 
     elif random_symbol == "Heart":
-        heart_card = card_deal(random_card, heart_card,
-                               picked_card, random_card_value)
+        
+        if random_card in heart_card:
+            heart_card = [x for x in heart_card if x != random_card]
+            print(picked_card)
+            print(heart_card)
+        else:
+            print_already_dealed()
+            pick_card() 
 
-
-def card_deal(random_card, list_given,
-              picked_card, random_card_value):
-    if random_card in list_given:
-        list_given = [x for x in list_given if x != random_card]
-        print_picked_card(picked_card)
-        card_count(random_card_value)
-        return list_given
-    else:
-        print_already_dealed()
-        pick_card()
-
+           
 
 def check_card_dealer(random_symbol, random_card, picked_card, random_card_value):
     global diamond_card
@@ -127,24 +135,20 @@ def check_card_dealer(random_symbol, random_card, picked_card, random_card_value
     global spade_card
 
     if random_symbol == "Spade":
-        spade_card = card_deal_dealer(
-            random_card, spade_card, picked_card, random_card_value)
+        spade_card = card_deal_dealer(random_card, spade_card, picked_card, random_card_value)
 
     elif random_symbol == "Diamond":
-        diamond_card = card_deal_dealer(
-            random_card, diamond_card, picked_card, random_card_value)
+        diamond_card = card_deal_dealer(random_card, diamond_card, picked_card, random_card_value)
     elif random_symbol == "Club":
-        club_card = card_deal_dealer(
-            random_card, club_card, picked_card, random_card_value)
+        club_card = card_deal_dealer(random_card, club_card, picked_card, random_card_value)
 
     elif random_symbol == "Heart":
-        heart_card = card_deal_dealer(
-            random_card, heart_card, picked_card, random_card_value)
+        heart_card = card_deal_dealer(random_card, heart_card, picked_card, random_card_value)
 
 
 # def card_deal_dealer
 
-def card_deal_dealer(random_card, list_given, picked_card, random_card_value):
+def card_deal_dealer(random_card, card, picked_card, random_card_value):
     if random_card in list_given:
         list_given = [x for x in list_given if x != random_card]
         print_picked_card(picked_card)
